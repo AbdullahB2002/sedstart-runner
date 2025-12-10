@@ -1,0 +1,19 @@
+name: Run Sedstart Test
+
+on:
+  repository_dispatch:
+    types: [run-sedstart]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: sedinqa/sedstart@main
+        with:
+          api_key: ${{ secrets.SEDSTART_API_KEY }}
+          project_id: "334"
+          test_id: "TC_01"
+          profile_id: "334"
+          browser: "chrome"
+          headless: "false"
+          environment: "Prod"
