@@ -18,3 +18,4 @@ jobs:
           -H "x-api-key: ${{ secrets.SEDSTART_API_KEY }}" \
           -d '{"project": "sample", "environment": "prod"}'
 
+
