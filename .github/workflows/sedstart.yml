@@ -1,19 +1,20 @@
-name: Run Sedstart Test
+name: Run Sedstart Testcases
 
 on:
-  repository_dispatch:
-    types: [run-sedstart]
+  workflow_dispatch:
 
 jobs:
-  run:
+  run-sedstart:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: sedinqa/sedstart@main
-        with:
-          api_key: ${{ secrets.SEDSTART_API_KEY }}
-          project_id: "334"
-          test_id: "TC_01"
-          profile_id: "334"
-          browser: "chrome"
-          headless: "false"
-          environment: "Prod"
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Call Sedstart API
+        run: |
+          curl -X POST "https://app.sedstart.com/api/run" \
+          -H "Content-Type: application/json" \
+          -H "x-api-key: ${{ secrets.SEDSTART_API_KEY }}" \
+          -d '{"project": "sample", "environment": "prod"}'
+
